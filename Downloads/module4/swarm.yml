@@ -1,0 +1,12 @@
+- name: Automate Docker Swarm Deployment
+  hosts: swarm
+  become: true
+
+  tasks:
+    - name: Initialize Swarm
+      command: docker swarm init
+      ignore_errors: yes
+
+    - name: Deploy Web Service
+      command: docker service create --name web-service --replicas 3 -p 8080:5000 webapp
+      ignore_errors: yes
